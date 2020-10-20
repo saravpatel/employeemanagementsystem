@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ProjectManagement" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=SARAV-PC\SQLEXPRESS;Initial Catalog=ProjectManagement;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ProjectManagementConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CityMaster" Member="CityMasters">
+    <Type Name="CityMaster">
+      <Column Name="CityId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CityMaster_CompanyMaster" Member="CompanyMasters" ThisKey="CityId" OtherKey="CityId" Type="CompanyMaster" />
+      <Association Name="CityMaster_EmployeeMaster" Member="EmployeeMasters" ThisKey="CityId" OtherKey="CityId" Type="EmployeeMaster" />
+      <Association Name="StateMaster_CityMaster" Member="StateMaster" ThisKey="StateId" OtherKey="StateId" Type="StateMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContactUs" Member="ContactUs">
+    <Type Name="ContactUs">
+      <Column Name="CId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ComapanyName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FaxNo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Website" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="LocationUrl" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DesignationMaster" Member="DesignationMasters">
+    <Type Name="DesignationMaster">
+      <Column Name="DegId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Designation" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="DesignationMaster_EmployeeMaster" Member="EmployeeMasters" ThisKey="DegId" OtherKey="DegId" Type="EmployeeMaster" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HolidayMaster" Member="HolidayMasters">
+    <Type Name="HolidayMaster">
+      <Column Name="HolidayId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HolidayName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="HolidayDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NewsMaster" Member="NewsMasters">
+    <Type Name="NewsMaster">
+      <Column Name="NewsId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="News" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="NewsDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Flag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CompanyMaster_NewsMaster" Member="CompanyMaster" ThisKey="CompanyId" OtherKey="CompanyId" Type="CompanyMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StateMaster" Member="StateMasters">
+    <Type Name="StateMaster">
+      <Column Name="StateId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StateName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="StateMaster_CityMaster" Member="CityMasters" ThisKey="StateId" OtherKey="StateId" Type="CityMaster" />
+      <Association Name="StateMaster_CompanyMaster" Member="CompanyMasters" ThisKey="StateId" OtherKey="StateId" Type="CompanyMaster" />
+      <Association Name="StateMaster_EmployeeMaster" Member="EmployeeMasters" ThisKey="StateId" OtherKey="StateId" Type="EmployeeMaster" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Admin" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="AdminId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AdminName" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="AdminPassword" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CompanyTypeMaster" Member="CompanyTypeMasters">
+    <Type Name="CompanyTypeMaster">
+      <Column Name="CompanytypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CompanyType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Table]" Member="Tables">
+    <Type Name="Table">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Project_Completion" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Month" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="EmployeeMaster_Table" Member="EmployeeMaster" ThisKey="EmpId" OtherKey="EmpId" Type="EmployeeMaster" IsForeignKey="true" />
+      <Association Name="ProjectMaster_Table" Member="ProjectMaster" ThisKey="ProjectId" OtherKey="ProjectId" Type="ProjectMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CompanyMaster" Member="CompanyMasters">
+    <Type Name="CompanyMaster">
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FaxNo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Website" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="EmpStrenght" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CompanyTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pwd" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="CompanyMaster_NewsMaster" Member="NewsMasters" ThisKey="CompanyId" OtherKey="CompanyId" Type="NewsMaster" />
+      <Association Name="CompanyMaster_EventMaster" Member="EventMasters" ThisKey="CompanyId" OtherKey="Company_Id" Type="EventMaster" />
+      <Association Name="CompanyMaster_EmployeeMaster" Member="EmployeeMasters" ThisKey="CompanyId" OtherKey="CompanyId" Type="EmployeeMaster" />
+      <Association Name="CompanyMaster_AllProject" Member="AllProjects" ThisKey="CompanyId" OtherKey="CompanyId" Type="AllProject" />
+      <Association Name="CompanyMaster_ProjectMaster" Member="ProjectMasters" ThisKey="CompanyId" OtherKey="CompanyId" Type="ProjectMaster" />
+      <Association Name="CityMaster_CompanyMaster" Member="CityMaster" ThisKey="CityId" OtherKey="CityId" Type="CityMaster" IsForeignKey="true" />
+      <Association Name="StateMaster_CompanyMaster" Member="StateMaster" ThisKey="StateId" OtherKey="StateId" Type="StateMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EventMaster" Member="EventMasters">
+    <Type Name="EventMaster">
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EventDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EventName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[Company Id]" Member="Company_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CompanyMaster_EventMaster" Member="CompanyMaster" ThisKey="Company_Id" OtherKey="CompanyId" Type="CompanyMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmployeeMaster" Member="EmployeeMasters">
+    <Type Name="EmployeeMaster">
+      <Column Name="EmpId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Passwrd" Type="System.String" DbType="VarChar(18)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DegId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dob" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="JoinDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="EmployeeMaster_Table" Member="Tables" ThisKey="EmpId" OtherKey="EmpId" Type="Table" />
+      <Association Name="EmployeeMaster_TaskMaster" Member="TaskMasters" ThisKey="EmpId" OtherKey="EmpId" Type="TaskMaster" />
+      <Association Name="EmployeeMaster_ProjectMaster" Member="ProjectMasters" ThisKey="EmpId" OtherKey="EmpId" Type="ProjectMaster" />
+      <Association Name="EmployeeMaster_BugMaster" Member="BugMasters" ThisKey="EmpId" OtherKey="EmpId" Type="BugMaster" />
+      <Association Name="EmployeeMaster_LeaveMaster" Member="LeaveMasters" ThisKey="EmpId" OtherKey="EmpId" Type="LeaveMaster" />
+      <Association Name="CityMaster_EmployeeMaster" Member="CityMaster" ThisKey="CityId" OtherKey="CityId" Type="CityMaster" IsForeignKey="true" />
+      <Association Name="DesignationMaster_EmployeeMaster" Member="DesignationMaster" ThisKey="DegId" OtherKey="DegId" Type="DesignationMaster" IsForeignKey="true" />
+      <Association Name="StateMaster_EmployeeMaster" Member="StateMaster" ThisKey="StateId" OtherKey="StateId" Type="StateMaster" IsForeignKey="true" />
+      <Association Name="CompanyMaster_EmployeeMaster" Member="CompanyMaster" ThisKey="CompanyId" OtherKey="CompanyId" Type="CompanyMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AllProject" Member="AllProjects">
+    <Type Name="AllProject">
+      <Column Name="Pid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProjectNameAll" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AllProject_ProjectMaster" Member="ProjectMasters" ThisKey="Pid" OtherKey="Pid" Type="ProjectMaster" />
+      <Association Name="CompanyMaster_AllProject" Member="CompanyMaster" ThisKey="CompanyId" OtherKey="CompanyId" Type="CompanyMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaskMaster" Member="TaskMasters">
+    <Type Name="TaskMaster">
+      <Column Name="TaskId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TaskName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TaskStatus" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TaskDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TaskMaster_BugMaster" Member="BugMasters" ThisKey="TaskId" OtherKey="TaskId" Type="BugMaster" />
+      <Association Name="EmployeeMaster_TaskMaster" Member="EmployeeMaster" ThisKey="EmpId" OtherKey="EmpId" Type="EmployeeMaster" IsForeignKey="true" />
+      <Association Name="ProjectMaster_TaskMaster" Member="ProjectMaster" ThisKey="ProjectId" OtherKey="ProjectId" Type="ProjectMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjectMaster" Member="ProjectMasters">
+    <Type Name="ProjectMaster">
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Discription" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="ProjectDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Enddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="No_Of_Days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ProjectMaster_Table" Member="Tables" ThisKey="ProjectId" OtherKey="ProjectId" Type="Table" />
+      <Association Name="ProjectMaster_TaskMaster" Member="TaskMasters" ThisKey="ProjectId" OtherKey="ProjectId" Type="TaskMaster" />
+      <Association Name="EmployeeMaster_ProjectMaster" Member="EmployeeMaster" ThisKey="EmpId" OtherKey="EmpId" Type="EmployeeMaster" IsForeignKey="true" />
+      <Association Name="AllProject_ProjectMaster" Member="AllProject" ThisKey="Pid" OtherKey="Pid" Type="AllProject" IsForeignKey="true" />
+      <Association Name="CompanyMaster_ProjectMaster" Member="CompanyMaster" ThisKey="CompanyId" OtherKey="CompanyId" Type="CompanyMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BugMaster" Member="BugMasters">
+    <Type Name="BugMaster">
+      <Column Name="BugId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BugName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TaskId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BugDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Solution" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="EmployeeMaster_BugMaster" Member="EmployeeMaster" ThisKey="EmpId" OtherKey="EmpId" Type="EmployeeMaster" IsForeignKey="true" />
+      <Association Name="TaskMaster_BugMaster" Member="TaskMaster" ThisKey="TaskId" OtherKey="TaskId" Type="TaskMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LeaveMaster" Member="LeaveMasters">
+    <Type Name="LeaveMaster">
+      <Column Name="LeaveId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LeaveReason" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="LeaveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StartLeaveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndLeaveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LeaveStatus" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="EmployeeMaster_LeaveMaster" Member="EmployeeMaster" ThisKey="EmpId" OtherKey="EmpId" Type="EmployeeMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.manage_city" Method="manage_city">
+    <Parameter Name="cid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="cname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="sid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_cityResult">
+      <Column Name="CityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_contactus" Method="manage_contactus">
+    <Parameter Name="companyid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="companyname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="mobileno" Type="System.String" DbType="VarChar(12)" />
+    <Parameter Name="phone" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="faxno" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="website" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="location" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_contactusResult">
+      <Column Name="CId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ComapanyName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FaxNo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Website" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="LocationUrl" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_holidaymaster" Method="manage_holidaymaster">
+    <Parameter Name="holidayid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="holidayname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_holidaymasterResult">
+      <Column Name="HolidayId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HolidayName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="HolidayDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_state" Method="manage_state">
+    <Parameter Name="sid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_stateResult">
+      <Column Name="StateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StateName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_companytypemaster" Method="manage_companytypemaster">
+    <Parameter Name="companytypeid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="companytype" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_companytypemasterResult">
+      <Column Name="CompanytypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyType" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_designationmaster" Method="manage_designationmaster">
+    <Parameter Name="degid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="designation" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_designationmasterResult">
+      <Column Name="DegId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Designation" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_pwd" Method="manage_pwd">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="pwd" Type="System.String" DbType="VarChar(8)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.manage_newsmaster" Method="manage_newsmaster">
+    <Parameter Name="newsid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="news" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="companyid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="flag" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_newsmasterResult">
+      <Column Name="NewsId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="News" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="NewsDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Flag" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_eventmaster" Method="manage_eventmaster">
+    <Parameter Name="eventid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="eventdate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="eventname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="cid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_eventmasterResult">
+      <Column Name="EventId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EventName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[Company Id]" Member="Company_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_employee" Method="manage_employee">
+    <Parameter Name="empid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="cid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mobileno" Type="System.String" DbType="VarChar(12)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(8)" />
+    <Parameter Name="photo" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="degid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dob" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="jdate" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="coid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_employeeResult">
+      <Column Name="EmpId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Passwrd" Type="System.String" DbType="VarChar(18)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DegId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dob" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="JoinDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CityId1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="StateId1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StateName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DegId1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Designation" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_employee1" Method="manage_employee1">
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="mname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="cid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mobileno" Type="System.String" DbType="VarChar(12)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(80)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(18)" />
+    <Parameter Name="photo" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="degid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dob" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="coid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.manage_Allproject" Method="manage_Allproject">
+    <Parameter Name="pid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProjectNameAll" Parameter="projectNameAll" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CompanyId" Parameter="companyId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_AllprojectResult">
+      <Column Name="Pid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProjectNameAll" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_taskmaster11" Method="manage_taskmaster11">
+    <Parameter Name="taskid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="taskname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="projectid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sdate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="edate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="taskstatus" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="tdate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="EmpId" Parameter="empId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_taskmaster11Result">
+      <Column Name="TaskId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaskName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TaskStatus" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TaskDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectId1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Discription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ProjectDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EmpId1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Enddate1" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="No_Of_Days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pid1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProjectNameAll" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_company1" Method="manage_company1">
+    <Parameter Name="companyid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="companyname" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="cid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mobileno" Type="System.String" DbType="VarChar(12)" />
+    <Parameter Name="phone" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="faxno" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="website" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="photo" Type="System.String" DbType="VarChar(250)" />
+    <Parameter Name="empstrenght" Type="System.Int32" DbType="Int" />
+    <Parameter Name="companytypeid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pwd" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_company1Result">
+      <Column Name="CityId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CityId1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FaxNo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Website" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="EmpStrenght" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CompanyTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pwd" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CompanytypeId1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="StateId2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StateName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_projectmaster" Method="manage_projectmaster">
+    <Parameter Name="projectid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="discription" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="pdate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="empid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sdate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="edate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="cid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_projectmasterResult">
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Discription" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="ProjectDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Enddate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="No_Of_Days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmpId1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Passwrd" Type="System.String" DbType="VarChar(18)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DegId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dob" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="JoinDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_bug" Method="manage_bug">
+    <Parameter Name="bugid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="bugname" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="empid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="taskid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="solution" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_bugResult">
+      <Column Name="EmpId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Passwrd" Type="System.String" DbType="VarChar(18)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DegId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dob" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="JoinDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BugId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BugName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="EmpId1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TaskId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BugDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Solution" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="TaskId1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TaskName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TaskStatus" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TaskDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EmpId2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.manage_leavemaster" Method="manage_leavemaster">
+    <Parameter Name="leaveid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="leavereason" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="leavestatus" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="empid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="type" Type="System.Int32" DbType="Int" />
+    <ElementType Name="manage_leavemasterResult">
+      <Column Name="LeaveId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LeaveReason" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="LeaveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StartLeaveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndLeaveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LeaveStatus" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EmpId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmpId1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Addres" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Passwrd" Type="System.String" DbType="VarChar(18)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DegId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dob" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="JoinDate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
